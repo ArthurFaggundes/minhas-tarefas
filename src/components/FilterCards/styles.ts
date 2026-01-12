@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import { PropsActive } from '.'
 
-export const Container = styled.div<PropsActive>`
+type PropsWithNoCounterAndLegend = Omit<PropsActive, 'counter' | 'legend'>
+
+export const Container = styled.div<PropsWithNoCounterAndLegend>`
   padding: 8px;
   border-radius: 8px;
   border: 1px solid ${(props) => (props.active ? '#1e90ff' : '#a1a1a1')};
