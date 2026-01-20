@@ -18,7 +18,7 @@ const TaskList = () => {
               title={t.Title}
               description={t.Description}
               priority={t.Priority}
-              status={t.status}
+              Status={t.Status}
             />
           </li>
         ))}

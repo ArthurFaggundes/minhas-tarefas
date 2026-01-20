@@ -1,15 +1,21 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import * as S from './styles'
 import * as enums from '../../utils/enums/Task'
+
+import { removeTask } from '../../store/reducers/tasks'
 
 type TaskProps = {
   title: string
   priority: enums.Priority
-  status: enums.Status
+  Status: enums.Status
   description: string
 }
 
-const Task = ({ title, priority, status, description }: TaskProps) => {
+const Task = ({ title, priority, Status, description }: TaskProps) => {
+
+  const dispatch = useDispatch()
   const [isEditing, setIsEditing] = useState(false)
 
   return (
@@ -18,8 +24,8 @@ const Task = ({ title, priority, status, description }: TaskProps) => {
       <S.Tag param="priority" priority={priority}>
         {priority}
       </S.Tag>
-      <S.Tag param="status" status={status}>
-        {status}
+      <S.Tag param="status" status={Status}>
+        {Status}
       </S.Tag>
       <S.Description value={description} placeholder="Task description..." />
       <S.ActionBar>
