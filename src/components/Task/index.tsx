@@ -11,10 +11,10 @@ type TaskProps = {
   priority: enums.Priority
   Status: enums.Status
   description: string
+  id: number
 }
 
-const Task = ({ title, priority, Status, description }: TaskProps) => {
-
+const Task = ({ title, priority, Status, description, id }: TaskProps) => {
   const dispatch = useDispatch()
   const [isEditing, setIsEditing] = useState(false)
 
@@ -39,7 +39,9 @@ const Task = ({ title, priority, Status, description }: TaskProps) => {
         ) : (
           <>
             <S.Button onClick={() => setIsEditing(true)}>Edit</S.Button>
-            <S.RemoveButton>Delete</S.RemoveButton>
+            <S.RemoveButton onClick={() => dispatch(removeTask(id))}>
+              Delete
+            </S.RemoveButton>
           </>
         )}
       </S.ActionBar>
