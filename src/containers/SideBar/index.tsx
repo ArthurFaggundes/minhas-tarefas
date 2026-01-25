@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 
+import { setSearchTerm } from '../../store/reducers/filter'
 import FilterCards from '../../components/FilterCards'
 import * as S from './styles'
-import { setSearchTerm } from '../../store/reducers/filter'
+import * as enums from '../../utils/enums/Task'
 
 const SideBar = () => {
   const dispatch = useDispatch()
@@ -20,12 +21,32 @@ const SideBar = () => {
         />{' '}
         {/* Campo de entrada para busca de tarefas, atualiza o estado do filtro ao digitar */}
         <S.Filter>
-          <FilterCards legend="pending" counter={1} />
-          <FilterCards legend="done" counter={2} />
-          <FilterCards legend="urgent" counter={1} />
-          <FilterCards legend="important" counter={5} />
-          <FilterCards legend="normal" counter={4} />
-          <FilterCards legend="all" counter={11} />
+          <FilterCards
+            value={enums.Status.PENDING}
+            criteria="Status"
+            legend="pending"
+          />
+          <FilterCards
+            value={enums.Status.DONE}
+            criteria="Status"
+            legend="done"
+          />
+          <FilterCards
+            value={enums.Priority.URGENT}
+            criteria="Priority"
+            legend="urgent"
+          />
+          <FilterCards
+            value={enums.Priority.IMPORTANT}
+            criteria="Priority"
+            legend="important"
+          />
+          <FilterCards
+            value={enums.Priority.NORMAL}
+            criteria="Priority"
+            legend="normal"
+          />
+          <FilterCards criteria="All" legend="all" />
         </S.Filter>
       </div>
     </S.Aside>
