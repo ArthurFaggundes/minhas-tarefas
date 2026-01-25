@@ -1,9 +1,8 @@
 import { useSelector } from 'react-redux'
-
-import Task from '../../components/Task'
-import { Container } from './styles'
-
 import { RootReducer } from '../../store'
+
+import { Container, Result } from './styles'
+import Task from '../../components/Task'
 
 const TaskList = () => {
   const { itens } = useSelector((state: RootReducer) => state.tasks) // Usa o hook useSelector para acessar o estado global da store Redux e obter a lista de tarefas
@@ -34,17 +33,33 @@ const TaskList = () => {
       return itens
     }
   }
+  const tasks = filterTasks()
+
+  const showSearchTerm = (quantity: number) => {
+    let mensage = ''
+    const complement =
+      searchTerm !== undefined && searchTerm.length > 0
+        ? `and "${searchTerm}"`
+        : ''
+
+    if (criteria === 'All') {
+      mensage = `${quantity} task(s) found as: All ${complement}`
+    } else {
+      mensage = `${quantity} task(s) found as: ${value} ${complement}`
+    }
+
+    return mensage
+  }
+  const filterMensage = showSearchTerm(tasks.length)
 
   return (
     <Container>
-      <p>
-        2 tasks marked as &quot;category&ldquo; and &quot;{searchTerm}&ldquo;
-      </p>
+      <Result>{filterMensage}</Result>
       <ul>
         <li></li>
       </ul>
       <ul>
-        {filterTasks().map((t) => (
+        {tasks.map((t) => (
           <li key={t.Title}>
             <Task
               id={t.Id}
