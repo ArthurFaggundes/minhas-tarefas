@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import * as S from './styles'
 import * as enums from '../../utils/enums/Task'
 
-import { removeTask } from '../../store/reducers/tasks'
+import { removeTask, editTask } from '../../store/reducers/tasks'
 
 type TaskProps = {
   title: string
@@ -14,9 +14,27 @@ type TaskProps = {
   id: number
 }
 
-const Task = ({ title, priority, Status, description, id }: TaskProps) => {
+const Task = ({
+  title,
+  priority,
+  Status,
+  description: originalDescription,
+  id
+}: TaskProps) => {
   const dispatch = useDispatch()
   const [isEditing, setIsEditing] = useState(false)
+  const [description, setDescription] = useState('')
+
+  useEffect(() => {
+    if (originalDescription.length > 0) {
+      setDescription(originalDescription)
+    }
+  }, [originalDescription])
+
+  function cancelEditing() {
+    setIsEditing(false)
+    setDescription(originalDescription) // para voltar ao texto original
+  }
 
   return (
     <S.Card>
@@ -27,14 +45,32 @@ const Task = ({ title, priority, Status, description, id }: TaskProps) => {
       <S.Tag param="status" status={Status}>
         {Status}
       </S.Tag>
-      <S.Description value={description} placeholder="Task description..." />
+      <S.Description
+        disabled={!isEditing}
+        value={description}
+        onChange={(event) => setDescription(event.target.value)} // para atualizar a descrição enquanto edita
+        placeholder="Task description..."
+      />
       <S.ActionBar>
         {isEditing ? (
           <>
-            <S.SaveButton>Save</S.SaveButton>
-            <S.RemoveButton onClick={() => setIsEditing(false)}>
-              Exit
-            </S.RemoveButton>
+            <S.SaveButton
+              onClick={() => {
+                dispatch(
+                  editTask({
+                    Title: title,
+                    Status,
+                    Priority: priority,
+                    Description: description,
+                    Id: id
+                  })
+                )
+                setIsEditing(false)
+              }}
+            >
+              Save
+            </S.SaveButton>
+            <S.RemoveButton onClick={cancelEditing}>Exit</S.RemoveButton>
           </>
         ) : (
           <>

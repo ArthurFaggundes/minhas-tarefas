@@ -42,10 +42,19 @@ export const tasksSlice = createSlice({
       // faz com que o estado atual seja filtrado, removendo a tarefa cujo id corresponde ao valor fornecido no payload da ação
       state.itens = state.itens.filter((task) => task.Id !== action.payload)
       return state
+    },
+    editTask: (state, action: PayloadAction<Task>) => {
+      const findTaskIndex = state.itens.findIndex(
+        (t) => t.Id === action.payload.Id
+      ) // encontra o índice da tarefa que corresponde ao id fornecido no payload da ação
+
+      if (findTaskIndex >= 0) {
+        state.itens[findTaskIndex] = action.payload // atualiza a tarefa encontrada com os novos dados fornecidos no payload da ação
+      }
     }
   }
 })
 
-export const { removeTask } = tasksSlice.actions
+export const { removeTask, editTask } = tasksSlice.actions
 
 export default tasksSlice.reducer
