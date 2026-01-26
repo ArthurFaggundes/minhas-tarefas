@@ -1,1 +1,9 @@
-export const NewTask = () => <div>Cadastro</div>
+import Form from '../../containers/Form'
+import SideBar from '../../containers/SideBar'
+
+export const NewTask = () => (
+  <>
+    <SideBar />
+    <Form />
+  </>
+)

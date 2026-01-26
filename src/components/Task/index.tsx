@@ -5,6 +5,7 @@ import * as S from './styles'
 import * as enums from '../../utils/enums/Task'
 
 import { removeTask, editTask } from '../../store/reducers/tasks'
+import { SaveButton } from '../../styles'
 
 type TaskProps = {
   title: string
@@ -54,7 +55,7 @@ const Task = ({
       <S.ActionBar>
         {isEditing ? (
           <>
-            <S.SaveButton
+            <SaveButton
               onClick={() => {
                 dispatch(
                   editTask({
@@ -69,7 +70,7 @@ const Task = ({
               }}
             >
               Save
-            </S.SaveButton>
+            </SaveButton>
             <S.RemoveButton onClick={cancelEditing}>Exit</S.RemoveButton>
           </>
         ) : (

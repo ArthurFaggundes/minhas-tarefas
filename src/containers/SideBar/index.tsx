@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 
 import { setSearchTerm } from '../../store/reducers/filter'
+import { SearchInput } from '../../styles'
 import FilterCards from '../../components/FilterCards'
 import * as S from './styles'
 import * as enums from '../../utils/enums/Task'
@@ -13,7 +14,7 @@ const SideBar = () => {
   return (
     <S.Aside>
       <div>
-        <S.SearchInput
+        <SearchInput
           type="text"
           placeholder="Search tasks..."
           value={searchTerm}
