@@ -51,10 +51,21 @@ export const tasksSlice = createSlice({
       if (findTaskIndex >= 0) {
         state.itens[findTaskIndex] = action.payload // atualiza a tarefa encontrada com os novos dados fornecidos no payload da ação
       }
+    },
+    addNewTask: (state, action: PayloadAction<Task>) => {
+      const taskExists = state.itens.find(
+        (task) =>
+          task.Title.toLowerCase() === action.payload.Title.toLowerCase()
+      )
+      if (taskExists) {
+        alert('A task with this title already exists')
+      } else {
+        state.itens.push(action.payload) // Adiciona a tarefa com o payload no array de Tasks
+      }
     }
   }
 })
 
-export const { removeTask, editTask } = tasksSlice.actions
+export const { removeTask, editTask, addNewTask } = tasksSlice.actions
 
 export default tasksSlice.reducer
