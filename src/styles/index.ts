@@ -1,5 +1,4 @@
 import styled, { createGlobalStyle } from 'styled-components'
-import { Button } from '../components/Task/styles'
 import colors from './colors'
 
 const GlobalStyle = createGlobalStyle`
@@ -30,6 +29,29 @@ export const SearchInput = styled.input`
   color: #666;
   border-color: #666;
   width: 100%;
+`
+
+export const Button = styled.button`
+  color: #fff;
+  background-color: #2f3640;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-right: 8px;
+`
+
+export const ReturnButton = styled.button`
+  color: #fff;
+  background-color: ${colors.darkGray};
+  border-radius: 8px;
+  border: none;
+  font-weight: 400;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
 `
 
 export const SaveButton = styled(Button)`

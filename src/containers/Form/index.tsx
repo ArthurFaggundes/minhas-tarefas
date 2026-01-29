@@ -7,7 +7,6 @@ import { SearchInput } from '../../styles/index'
 import { FormContainer, OptionsContainer, Option } from './styles'
 import { addNewTask } from '../../store/reducers/tasks'
 import * as enums from '../../utils/enums/Task'
-import Task from '../../models/Task'
 
 const Form = () => {
   const dispatch = useDispatch()
@@ -19,14 +18,15 @@ const Form = () => {
 
   const addTask = (event: FormEvent) => {
     event.preventDefault()
-    const taskToAdd = new Task(
-      title,
-      description,
-      priority,
-      enums.Status.PENDING,
-      9
+
+    dispatch(
+      addNewTask({
+        Title: title,
+        Description: description,
+        Priority: priority,
+        Status: enums.Status.PENDING
+      })
     )
-    dispatch(addNewTask(taskToAdd))
     navigate('/')
   }
 

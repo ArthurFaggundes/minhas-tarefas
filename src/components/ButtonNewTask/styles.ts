@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import colors from '../../styles/colors'
 
 export const Circle = styled(Link)`
-  background-color: #6ab04c;
+  background-color: ${colors.green};
   color: #fff;
   position: fixed;
   bottom: 40px;

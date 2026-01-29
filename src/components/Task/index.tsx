@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import * as S from './styles'
 import * as enums from '../../utils/enums/Task'
 
-import { removeTask, editTask } from '../../store/reducers/tasks'
-import { SaveButton } from '../../styles'
+import { removeTask, editTask, changeStatus } from '../../store/reducers/tasks'
+import { Button, SaveButton } from '../../styles'
 
 type TaskProps = {
   title: string
@@ -37,9 +37,31 @@ const Task = ({
     setDescription(originalDescription) // para voltar ao texto original
   }
 
+  function changeTaskStatus(e: ChangeEvent<HTMLInputElement>) {
+    dispatch(
+      changeStatus({
+        Id: id,
+        Done: e.target.checked
+      })
+    )
+  }
+
   return (
     <S.Card>
-      <S.Title>{title}</S.Title>
+      <label htmlFor={title}>
+        <input
+          type="checkbox"
+          id={title}
+          checked={Status === enums.Status.DONE}
+          onChange={changeTaskStatus}
+        />{' '}
+        {/* Status === enums.Status.DONE vai estar marcado quando estiver como Stutus = Done */}
+        <S.Title>
+          {isEditing && <em>Editing: </em>}
+          {/* se for True mostra texto, basicamente*/}
+          {title}
+        </S.Title>
+      </label>
       <S.Tag param="priority" priority={priority}>
         {priority}
       </S.Tag>
@@ -75,7 +97,7 @@ const Task = ({
           </>
         ) : (
           <>
-            <S.Button onClick={() => setIsEditing(true)}>Edit</S.Button>
+            <Button onClick={() => setIsEditing(true)}>Edit</Button>
             <S.RemoveButton onClick={() => dispatch(removeTask(id))}>
               Delete
             </S.RemoveButton>

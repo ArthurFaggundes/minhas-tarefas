@@ -3,7 +3,7 @@ import SideBar from '../../containers/SideBar'
 
 export const NewTask = () => (
   <>
-    <SideBar />
+    <SideBar showFilters={false} />
     <Form />
   </>
 )

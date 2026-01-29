@@ -4,7 +4,7 @@ import ButtonNewTask from '../../components/ButtonNewTask'
 
 export const Home = () => (
   <>
-    <SideBar />
+    <SideBar showFilters />
     <TaskList />
     <ButtonNewTask />
   </>

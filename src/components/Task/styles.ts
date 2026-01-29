@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import colors from '../../styles/colors'
 
 import * as enums from '../../utils/enums/Task'
+import { Button } from '../../styles'
 
 type TagProps = {
   priority?: enums.Priority
@@ -22,19 +23,34 @@ function returnBackgroundColor(props: TagProps): string {
   return '#95afc0'
 }
 
+// function lineThroughTitle(props: TagProps) {
+//   if (props.status === enums.Status.DONE) return 'line-through'
+// }
+
 export const Card = styled.div`
   background-color: #fcfcfc;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   padding: 16px;
   margin-bottom: 32px;
   border-radius: 16px;
+
+  label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    cursor: pointer;
+
+    input {
+      margin-right: 8px;
+    }
+  }
 `
 
 export const Title = styled.h3`
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 16px;
 `
+// text-decoration: ${(props) => lineThroughTitle(props)};
 
 export const Tag = styled.span<TagProps>`
   color: #fff;
@@ -63,18 +79,6 @@ export const Description = styled.textarea`
 export const ActionBar = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 16px;
-`
-
-export const Button = styled.button`
-  color: #fff;
-  background-color: #2f3640;
-  font-weight: bold;
-  font-size: 12px;
-  padding: 8px 12px;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  margin-right: 8px;
 `
 
 export const RemoveButton = styled(Button)`
